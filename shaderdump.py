@@ -49,6 +49,7 @@ uniform int iFrame;
 {user_code}
 
 void main() {{
+    float f = float(iFrame) / 60.0;
     mainImage(fragColor, gl_FragCoord.xy);
 }}
 """
