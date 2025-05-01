@@ -29,7 +29,7 @@ END_TIME = args.endTime
 FPS = args.framesPerSecond
 
 # === CONTEXT SETUP ===
-ctx = moderngl.create_standalone_context()
+ctx = moderngl.create_standalone_context(backend='egl')
 
 # === SHADER SETUP ===
 with open(SHADER_PATH) as f:
@@ -48,9 +48,15 @@ uniform int iFrame;
 
 {user_code}
 
+
+
 void main() {{
     float f = float(iFrame) / 60.0;
     mainImage(fragColor, gl_FragCoord.xy);
+    // Force the compiler to think f is used
+    if (f < -1.0) {{
+        fragColor = vec4(1.0);  // never executed, but f is "used"
+    }}
 }}
 """
 
@@ -127,6 +133,7 @@ for frame in range(num_frames):
     # Set shader uniforms
     prog['iResolution'].value = (RENDER_W, RENDER_H, 1.0)
     prog['iTime'].value = t
+
     prog['iFrame'].value = frame
 
     # Render to supersampled target
