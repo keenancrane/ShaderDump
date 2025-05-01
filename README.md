@@ -8,6 +8,8 @@
 
 I wrote this script because all the other ones I could find on the web were broken.  This one will be broken too someday, but for the moment it works.
 
+_**Note:** The current version of ShaderDump does not produce correct output for shaders that depend on ShaderToy.com assets (textures, etc.)._
+
 ---
 
 ## Input
