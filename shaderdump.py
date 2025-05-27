@@ -29,7 +29,8 @@ END_TIME = args.endTime
 FPS = args.framesPerSecond
 
 # === CONTEXT SETUP ===
-ctx = moderngl.create_standalone_context(backend='egl')
+ctx = moderngl.create_standalone_context()
+# ctx = moderngl.create_standalone_context(backend='egl')  # uncomment for headless version
 
 # === SHADER SETUP ===
 with open(SHADER_PATH) as f:
